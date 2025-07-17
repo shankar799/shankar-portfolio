@@ -1,0 +1,49 @@
+'use strict';
+
+
+
+
+
+// contact form variables
+const form = document.querySelector("[data-form]");
+const formInputs = document.querySelectorAll("[data-form-input]");
+const formBtn = document.querySelector("[data-form-btn]");
+
+// add event to all form input field
+for (let i = 0; i < formInputs.length; i++) {
+  formInputs[i].addEventListener("input", function () {
+
+    // check form validation
+    if (form.checkValidity()) {
+      formBtn.removeAttribute("disabled");
+    } else {
+      formBtn.setAttribute("disabled", "");
+    }
+
+  });
+}
+
+
+
+// page navigation variables
+const navigationLinks = document.querySelectorAll("[data-nav-link]");
+const pages = document.querySelectorAll("[data-page]");
+
+// add event to all nav link
+for (let i = 0; i < navigationLinks.length; i++) {
+  navigationLinks[i].addEventListener("click", function () {
+    const pageName = this.getAttribute("data-page");
+    for (let j = 0; j < pages.length; j++) {
+      if (pages[j].dataset.page === pageName) {
+        pages[j].classList.add("active");
+      } else {
+        pages[j].classList.remove("active");
+      }
+    }
+    for (let k = 0; k < navigationLinks.length; k++) {
+      navigationLinks[k].classList.remove("active");
+    }
+    this.classList.add("active");
+    window.scrollTo(0, 0);
+  });
+}
